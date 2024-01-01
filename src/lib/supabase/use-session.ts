@@ -19,7 +19,7 @@ export default function useSession() {
     };
 
     getSession();
-  }, [session]);
+  }, []);
 
   return session;
 }
