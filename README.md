@@ -46,6 +46,8 @@ Create the `middleware.ts` in your `src` directory. This intercepts any route sp
 
 **This can be used used for creating [protected routes](https://github.com/SamuelSackey/nextjs-supabase-example/blob/ba0d4d1b7f52a2f0435933892ea5d2b5cb7c1c0f/src/middleware.ts#L20).**
 
+An alternative method of creating protected routes is highlighted [here](#page-based-protected-routes).
+
 To run the middleware on every route, simply remove the [`matcher`](https://github.com/SamuelSackey/nextjs-supabase-example/blob/ba0d4d1b7f52a2f0435933892ea5d2b5cb7c1c0f/src/middleware.ts#L28) object from the config.
 
 - [`src/middleware.ts`](https://github.com/SamuelSackey/nextjs-supabase-example/blob/main/src/middleware.ts)
@@ -115,8 +117,6 @@ const {
 } = await createSupabaseServerComponentClient().auth.getUser();
 ```
 
-Example in [`src/components/avatar.tsx`](https://github.com/SamuelSackey/nextjs-supabase-example/blob/main/src/components/avatar.tsx)
-
 ## Fetching User Data in Client Components
 
 To prevent repeating code when fetching the session in client components, create a custom hook `useSession()` which returns the user session object.
@@ -140,6 +140,30 @@ To address this issue, we can implement the following solution:
   - Client Component: [`src/components/details-button-client.tsx`](https://github.com/SamuelSackey/nextjs-supabase-example/blob/main/src/components/details-button-client.tsx)
 
 For more information, check out this [video](https://egghead.io/lessons/supabase-dynamically-render-ui-based-on-user-session-with-ssr-in-next-js-client-components)
+
+### Page-based Protected Routes
+
+Routes can be protected by checking whether there is a supabase session. If there is no session, the user is redirected to the specified page.
+
+Example in [`src/components/avatar.tsx`](https://github.com/SamuelSackey/nextjs-supabase-example/blob/main/src/components/avatar.tsx)
+
+```tsx
+// other imports...
+import { redirect } from "next/navigation";
+
+export default async function Page() {
+  const {
+    data: { session },
+    error,
+  } = await createSupabaseServerComponentClient().auth.getSession();
+
+  if (!session) {
+    redirect("/");
+  }
+
+  // ...
+}
+```
 
 ## Generating Typescript Definitions (Additional)
 
@@ -174,3 +198,9 @@ export function createSupabaseBrowserClient() {
   // ...
 }
 ```
+
+## Where to go from here
+
+The project is primarily based on this [course](https://egghead.io/courses/build-a-twitter-clone-with-the-next-js-app-router-and-supabase-19bebadb), which includes topics such as querying the database, setting up row-level security, optimistic updates, and many more. Although it utilizes the auth-helpers package, it can be easily modified using the contents of this project.
+
+I would also like to give credit to the providers of the resources used in this project.
