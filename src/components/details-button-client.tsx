@@ -30,7 +30,9 @@ export default function DetailsButtonClient({
 
               <br />
 
-              <Link href={"/account"}>View Account Page</Link>
+              <Link href={"/account"}>
+                <button>View Account Page</button>
+              </Link>
             </>
           )}
         </>
