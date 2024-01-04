@@ -117,6 +117,8 @@ const {
 } = await createSupabaseServerComponentClient().auth.getUser();
 ```
 
+Example in [`src/components/avatar.tsx`](https://github.com/SamuelSackey/nextjs-supabase-example/blob/main/src/components/avatar.tsx)
+
 ## Fetching User Data in Client Components
 
 To prevent repeating code when fetching the session in client components, create a custom hook `useSession()` which returns the user session object.
@@ -144,8 +146,6 @@ For more information, check out this [video](https://egghead.io/lessons/supabase
 ### Page-based Protected Routes
 
 Routes can be protected by checking whether there is a supabase session. If there is no session, the user is redirected to the specified page.
-
-Example in [`src/components/avatar.tsx`](https://github.com/SamuelSackey/nextjs-supabase-example/blob/main/src/components/avatar.tsx)
 
 ```tsx
 // other imports...
