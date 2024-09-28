@@ -11,10 +11,8 @@ export async function middleware(request: NextRequest) {
   const supabase = createSupabaseReqResClient(request, response);
 
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  const user = session?.user;
+    data: { user },
+  } = await supabase.auth.getUser();
 
   // protects the "/account" route and its sub-routes
   if (!user && request.nextUrl.pathname.startsWith("/account")) {

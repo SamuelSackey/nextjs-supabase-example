@@ -106,6 +106,9 @@ const {
 const user = session?.user;
 ```
 
+> NOTE  
+> This value comes directly from the storage medium (usually cookies on the server) and many not be authentic. You can use `supabase.auth.getUser()` instead which authenticates the data by contacting the Supabase Auth server.
+
 Example in [`src/components/nav-bar.tsx`](https://github.com/SamuelSackey/nextjs-supabase-example/blob/main/src/components/nav-bar.tsx)
 
 ### Fetch user data directly in server components
@@ -153,11 +156,11 @@ import { redirect } from "next/navigation";
 
 export default async function Page() {
   const {
-    data: { session },
+    data: { user },
     error,
-  } = await createSupabaseServerComponentClient().auth.getSession();
+  } = await createSupabaseServerComponentClient().auth.getUser();
 
-  if (!session) {
+  if (!user) {
     redirect("/");
   }
 

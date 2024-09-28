@@ -1,16 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Session } from "@supabase/supabase-js";
+import { type User } from "@supabase/supabase-js";
 import Link from "next/link";
 
-export default function DetailsButtonClient({
-  session,
-}: {
-  session: Session | null;
-}) {
-  const user = session?.user;
-
+export default function DetailsButtonClient({ user }: { user: User | null }) {
   const [isHidden, setIsHidden] = useState(true);
 
   return (

@@ -3,9 +3,9 @@ import DetailsButtonClient from "./details-button-client";
 
 export default async function DetailsButtonServer() {
   const {
-    data: { session },
+    data: { user },
     error,
-  } = await createSupabaseServerComponentClient().auth.getSession();
+  } = await createSupabaseServerComponentClient().auth.getUser();
 
-  return <DetailsButtonClient session={session} />;
+  return <DetailsButtonClient user={user} />;
 }
