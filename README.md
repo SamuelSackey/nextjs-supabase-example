@@ -16,7 +16,10 @@ NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
-You can get these values from your Supabase dashboard `Settings > API`
+You can get these values from your Supabase dashboard `Project Settings > Data API`
+
+> [!NOTE]  
+> When the app is deployed, set the deployment URL as the `Site URL` in the supabase dashboard at `Authentication > URL Configuration`
 
 ## Configure Supabase Clients
 
@@ -106,7 +109,7 @@ const {
 const user = session?.user;
 ```
 
-> NOTE  
+> [!NOTE]  
 > This value comes directly from the storage medium (usually cookies on the server) and many not be authentic. You can use `supabase.auth.getUser()` instead which authenticates the data by contacting the Supabase Auth server.
 
 Example in [`src/components/nav-bar.tsx`](https://github.com/SamuelSackey/nextjs-supabase-example/blob/main/src/components/nav-bar.tsx)
